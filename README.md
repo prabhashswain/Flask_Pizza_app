@@ -1,5 +1,7 @@
 # Flask_Pizza_app
 
+#create virtual environment
+
 ```bash
-create virtual environment
+python3 -m venv env
 ```
