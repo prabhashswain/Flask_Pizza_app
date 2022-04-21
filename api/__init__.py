@@ -6,10 +6,13 @@ from api.utils import db
 from flask_migrate import Migrate
 from api.models.orders import Order
 from api.models.users import User
+from flask_jwt_extended import JWTManager
 
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
+    jwt = JWTManager(app)
+
 
     db.init_app(app)
     migrate = Migrate(app,db)

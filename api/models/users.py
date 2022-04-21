@@ -12,7 +12,7 @@ class User(db.Model):
     orders = db.relationship('Order',backref='user',lazy=True)
 
     def __repr__(self):
-        f"<User {self.id} {self.username}>"
+        return f"<User {self.username}>"
 
 
     def save(self):
