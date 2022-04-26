@@ -24,7 +24,7 @@ order_model = order_ns.model(
 @order_ns.route('/')
 class OrderResource(Resource):
     @order_ns.marshal_with(order_model)
-    @jwt_required()
+    # @jwt_required()
     def get(self):
         """
         Get all Order
