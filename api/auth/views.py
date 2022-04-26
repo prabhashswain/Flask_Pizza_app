@@ -76,13 +76,16 @@ class LoginResource(Resource):
                 'acess_token':access_token,
                 'refresh_token':refresh_token
             }),HTTPStatus.OK)
-        return jsonify({'error':'Invalid Credentials'})
+        raise BadRequest("Invalid Username and Password")
 
 
 @auth_ns.route('/refresh')
 class RefreshTokenResource(Resource):
     @jwt_required(refresh=True)
     def post(self):
+        """
+        Get Refresh Token 
+        """
         username = get_jwt_identity()
         access_token = create_access_token(identity=username)
         return make_response(jsonify({

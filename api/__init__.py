@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from api.models.orders import Order
 from api.models.users import User
 from flask_jwt_extended import JWTManager
+from werkzeug.exceptions import NotFound,MethodNotAllowed
 
 def create_app(config):
     app = Flask(__name__)
@@ -16,6 +17,8 @@ def create_app(config):
 
     db.init_app(app)
     migrate = Migrate(app,db)
+
+    
     
     authorizations={
         "Bearer Auth":{
@@ -34,6 +37,14 @@ def create_app(config):
     )
     api.add_namespace(auth_ns,path='/api/v1/auth')
     api.add_namespace(order_ns,path='/api/v1/order')
+
+    @api.errorhandler(NotFound)
+    def orderNotFound(error):
+        return {'error':'Not Found'},404
+
+    @api.errorhandler(MethodNotAllowed)
+    def orderNotFound(error):
+        return {'error':'Method Not Allowed'},404
 
     @app.shell_context_processor
     def make_shell_context():

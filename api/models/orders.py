@@ -35,7 +35,7 @@ class Order(db.Model):
 
 
     @classmethod
-    def get_by_id(cls,id):
+    def get_order_by_id(cls,id):
         return cls.query.get_or_404(id)
 
 
