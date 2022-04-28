@@ -9,6 +9,7 @@ from api.models.users import User
 from flask_jwt_extended import JWTManager
 from werkzeug.exceptions import NotFound,MethodNotAllowed
 from flask_cors import CORS
+from flask_debugtoolbar import DebugToolbarExtension
 
 def create_app(config):
     app = Flask(__name__,static_url_path='/',static_folder='../client/build')
@@ -18,6 +19,8 @@ def create_app(config):
 
     db.init_app(app)
     migrate = Migrate(app,db)
+    # debug toolbar
+    toolbar = DebugToolbarExtension(app)
     # cors enabled
     CORS(app)
     
